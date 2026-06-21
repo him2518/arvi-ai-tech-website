@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – CricPulse</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #080E1A;
+      color: #E0E6F0;
+      line-height: 1.75;
+      padding: 0 16px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0D6B2E 0%, #1A9E44 100%);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 16px 80px;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1A9E44;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #1a2a1a;
+    }
+
+    p { margin-top: 10px; color: #C5D0DC; }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+      color: #C5D0DC;
+    }
+
+    ul li { margin-top: 6px; }
+
+    a { color: #1A9E44; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(26,158,68,0.15);
+      border: 1px solid rgba(26,158,68,0.4);
+      color: #1A9E44;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 16px;
+      border-top: 1px solid #1a2a1a;
+      color: #5A6878;
+      font-size: 0.85rem;
+    }
+  </style>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+
+<header>
+  <h1>🏏 CricPulse</h1>
+  <p>Privacy Policy</p>
+  <span class="badge">Effective Date: June 16, 2025</span>
+</header>
+
+<div class="container">
+
+  <p>
+    This Privacy Policy describes how <strong>Arvi AI Tech</strong> ("we", "us", or "our") collects,
+    uses, and protects information when you use the <strong>CricPulse</strong> mobile application
+    ("App"). By using CricPulse you agree to the practices described here.
+  </p>
+
+  <h2>1. Information We Collect</h2>
+  <p>We collect the following types of information:</p>
+  <ul>
+    <li><strong>Account Information:</strong> When you sign in with Google or phone number (OTP),
+        we receive your name, email address, and phone number from Firebase Authentication.</li>
+    <li><strong>Guest / Anonymous Sessions:</strong> If you choose "Continue as Guest", Firebase
+        assigns a temporary anonymous ID. No personal information is collected.</li>
+    <li><strong>Match & Scoring Data:</strong> Scores, player names, team names, and match
+        statistics you enter are stored locally on your device and optionally synced to
+        Firebase Firestore for live broadcast overlays.</li>
+    <li><strong>Live Stream Data:</strong> When you broadcast a match, video and audio are
+        transmitted directly from your device to YouTube (or any RTMP endpoint you configure)
+        via RTMP. We do not store or record your stream.</li>
+    <li><strong>Device & Usage Information:</strong> We collect anonymised crash reports and
+        performance data to improve stability. This may include device model, OS version,
+        and app version.</li>
+    <li><strong>Advertising Data:</strong> We use Google AdMob to serve ads. AdMob may collect
+        device identifiers and usage data in accordance with
+        <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+  </ul>
+
+  <h2>2. How We Use Your Information</h2>
+  <ul>
+    <li>To provide and improve the CricPulse scoring and live-streaming experience.</li>
+    <li>To authenticate your account and keep your match data synced across sessions.</li>
+    <li>To power the live scoring overlay shown during your YouTube broadcast.</li>
+    <li>To display relevant advertisements through Google AdMob.</li>
+    <li>To diagnose crashes and fix bugs using anonymised diagnostics.</li>
+  </ul>
+
+  <h2>3. Data Storage & Security</h2>
+  <p>
+    Your data is stored using <strong>Firebase</strong> (Google LLC) services — Authentication,
+    Firestore, and Storage — which are protected by industry-standard encryption in transit (TLS)
+    and at rest. Match data you create is stored locally on your device first; cloud sync occurs
+    only during live broadcast sessions.
+  </p>
+  <p>
+    We take reasonable technical and organisational measures to protect your information, but no
+    method of transmission over the internet is 100% secure.
+  </p>
+
+  <h2>4. Data Sharing</h2>
+  <p>We do <strong>not</strong> sell, rent, or trade your personal information. We share data only with:</p>
+  <ul>
+    <li><strong>Firebase / Google LLC</strong> — for authentication, database, and storage services.</li>
+    <li><strong>Google AdMob</strong> — for in-app advertising.</li>
+    <li><strong>YouTube / RTMP Providers</strong> — your live stream goes directly to the endpoint
+        you configure; we do not intermediate or store stream content.</li>
+    <li><strong>Legal requirements</strong> — if required by law or to protect rights and safety.</li>
+  </ul>
+
+  <h2>5. Permissions We Request</h2>
+  <ul>
+    <li><strong>Camera</strong> — required to capture and broadcast the live cricket stream.</li>
+    <li><strong>Microphone</strong> — required to include audio in the live broadcast.</li>
+    <li><strong>Internet</strong> — required for Firebase sync, live streaming, and ads.</li>
+    <li><strong>Read Media (Images/Video)</strong> — used to access media for overlay customisation.</li>
+    <li><strong>Foreground Service</strong> — keeps the broadcast running while the app is in the foreground.</li>
+  </ul>
+  <p>All permissions are requested only when needed and explained in-context within the App.</p>
+
+  <h2>6. Children's Privacy</h2>
+  <p>
+    CricPulse is not directed at children under 13. We do not knowingly collect personal
+    information from children. If you believe a child has provided us with personal data,
+    please contact us and we will delete it promptly.
+  </p>
+
+  <h2>7. Your Rights & Choices</h2>
+  <ul>
+    <li><strong>Access & Correction:</strong> You can view and update your profile information
+        within the App.</li>
+    <li><strong>Delete Account:</strong> Use our
+        <a href="delete_account.html">Account Deletion Request page</a>
+        to permanently delete your account and all associated data.</li>
+    <li><strong>Ad Personalisation:</strong> You can opt out of personalised ads through your
+        device's ad settings (Android: Settings → Privacy → Ads).</li>
+    <li><strong>Guest Mode:</strong> Use the App without creating an account; anonymous data is
+        not linked to any identity.</li>
+  </ul>
+
+  <h2>8. Third-Party Services</h2>
+  <p>CricPulse integrates with the following third-party services, each governed by their own privacy policies:</p>
+  <ul>
+    <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase (Google LLC)</a></li>
+    <li><a href="https://policies.google.com/privacy" target="_blank">Google Sign-In & AdMob</a></li>
+    <li><a href="https://www.youtube.com/static?template=terms" target="_blank">YouTube (for live streaming)</a></li>
+  </ul>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>
+    We may update this Privacy Policy from time to time. When we do, we will update the
+    "Effective Date" at the top of this page. We encourage you to review this page periodically.
+    Continued use of the App after changes constitutes acceptance of the updated policy.
+  </p>
+
+  <h2>10. Contact Us</h2>
+  <p>
+    If you have questions or concerns about this Privacy Policy, please contact us at:<br/><br/>
+    <strong>Arvi AI Tech</strong><br/>
+    Email: <a href="mailto:hello@arviaitech.com">hello@arviaitech.com</a>
+  </p>
+
+</div>
+
+<footer>
+  &copy; 2025 Arvi AI Tech. All rights reserved. &nbsp;|&nbsp; CricPulse
+</footer>
+
+</body>
+</html>

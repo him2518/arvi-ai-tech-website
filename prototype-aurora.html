@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arvi AI Tech — Aurora Prototype</title>
+  <meta name="description" content="Arvi AI Tech engineers intelligent games and bespoke AI systems — Aurora Design System." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #03000a;
+      --panel: rgba(255, 255, 255, 0.03);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --ink: #f8f9fa;
+      --muted: #a0aec0;
+      --cyan: #38f3ff;
+      --violet: #8b5cff;
+      --pink: #ff007a;
+      --font-sans: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Aurora Background Blobs */
+    .aurora-container {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: float 25s infinite ease-in-out alternate;
+    }
+
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--violet) 0%, transparent 70%);
+      top: -200px;
+      left: -100px;
+      animation-duration: 20s;
+    }
+
+    .blob-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      animation-duration: 28s;
+    }
+
+    .blob-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-duration: 24s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -30px) scale(1.1); }
+      100% { transform: translate(-20px, 40px) scale(0.95); }
+    }
+
+    /* Grid overlay */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    /* Layout Wrapper */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--panel-border);
+      background: rgba(3, 0, 10, 0.7);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #03000a;
+      font-weight: 900;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      margin-left: 32px;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      background: linear-gradient(to right, #ffffff, #dcdcdc, var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #03000a;
+      box-shadow: 0 8px 30px rgba(56, 243, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(56, 243, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: var(--panel);
+      color: var(--ink);
+      border: 1px solid var(--panel-border);
+      margin-left: 16px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Section styling */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--violet);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 243, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .card li {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--panel-border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    /* Contact Section */
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 24px;
+      padding: 48px;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--cyan);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+    }
+
+    .btn-block {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .form-note {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--panel-border);
+      padding: 60px 0 40px;
+      text-align: center;
+      background: rgba(3, 0, 10, 0.9);
+      position: relative;
+    }
+
+    .footer-brand {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
+
+    .badge-container {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .copyright {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .back-btn {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 100;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+  </style>
+  
+  <!-- Google AdSense (Lazy Loaded for Performance) -->
+  <script type="text/javascript">
+    let adLoaded = false;
+    function loadAds() {
+      if(!adLoaded) {
+        adLoaded = true;
+        let s = document.createElement('script');
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8633808258036617";
+        s.crossOrigin = "anonymous";
+        document.head.appendChild(s);
+        window.removeEventListener('scroll', loadAds);
+        window.removeEventListener('mousemove', loadAds);
+        window.removeEventListener('touchstart', loadAds);
+      }
+    }
+    window.addEventListener('scroll', loadAds);
+    window.addEventListener('mousemove', loadAds);
+    window.addEventListener('touchstart', loadAds);
+    setTimeout(loadAds, 5000);
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+
+  <!-- Aurora Blobs -->
+  <div class="aurora-container">
+    <div class="aurora-blob blob-1"></div>
+    <div class="aurora-blob blob-2"></div>
+    <div class="aurora-blob blob-3"></div>
+  </div>
+
+  <div class="grid-overlay"></div>
+
+  <a href="./index.html" class="back-btn">← Compare Options</a>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">A</span>
+        <span>ARVI<span style="color:var(--cyan)">·AI·TECH</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="pill">Prototype A: Aurora Digital</span>
+      <h1>Build Next-Generation<br/>AI &amp; Game Experiences</h1>
+      <p class="hero-sub">
+        We turn pioneering concepts into fully engineered realities. Delivering bespoke AI systems, autonomous agents, and cross-platform games.
+      </p>
+      <div>
+        <a href="#contact" class="btn btn-primary">Start a Project</a>
+        <a href="#services" class="btn btn-secondary">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">[ Capabilities ]</span>
+        <h2>High-End AI &amp; Game Engineering</h2>
+        <p>Expertly crafted tools and interactive systems designed to scale.</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <h3>Game Development</h3>
+          <p>Immersive mobile & web games built inside Unity & Flutter—from gameplay mechanics to polished release.</p>
+          <ul>
+            <li>Unity</li>
+            <li>Flutter</li>
+            <li>2D/3D</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>AI Game Solutions</h3>
+          <p>Adaptive difficulty configurations, neural-network-driven NPCs, and procedural tools for modern developers.</p>
+          <ul>
+            <li>Smart NPCs</li>
+            <li>Procedural</li>
+            <li>Behaviors</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>Autonomous Agents</h3>
+          <p>Multi-step agents capable of automated tool-use, workflow execution, and intelligent data pipeline management.</p>
+          <ul>
+            <li>LangChain</li>
+            <li>Tool-Use</li>
+            <li>Workflow</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">[ Contact ]</span>
+        <h2>Get in Touch</h2>
+        <p>Let's collaborate on building your custom solution. Message replies guaranteed in 24 hours.</p>
+      </div>
+
+      <div class="contact-container">
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Jane Doe" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Project Details</label>
+            <textarea name="message" rows="4" class="form-control" placeholder="Tell us about what you want to build..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Transmit Message <span>→</span></button>
+          <p class="form-note" id="formNote" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-brand">
+        <span class="logo-icon">A</span>
+        <span>ARVI·AI·TECH</span>
+      </div>
+      <p style="color:var(--muted); margin-bottom: 20px;">Engineering intelligent games &amp; AI systems.</p>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+      
+      <div class="badge-container">
+        <img src="https://api.visitorbadge.io/api/visitors?path=arviaitech.com&label=VISITORS&labelColor=%2304050a&countColor=%2338f3ff&style=plastic" alt="visitor badge" />
+      </div>
+
+      <p class="copyright">© <span id="year"></span> Arvi AI Tech · Aurora Prototype · All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("contactForm");
+    const note = document.getElementById("formNote");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "Transmitting... <span>→</span>";
+      btn.disabled = true;
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          note.hidden = false;
+          note.style.color = "var(--cyan)";
+          note.textContent = "✦ Message received successfully! We will be in touch.";
+          btn.innerHTML = "Sent ✦";
+          setTimeout(() => {
+            form.reset();
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            note.hidden = true;
+          }, 5000);
+        } else {
+          throw new Error("Server rejected request");
+        }
+      } catch (err) {
+        note.hidden = false;
+        note.style.color = "var(--pink)";
+        note.textContent = "✦ Error sending message. Please try again or email us directly.";
+        btn.innerHTML = "Error ✦";
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>

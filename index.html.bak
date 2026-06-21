@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arvi AI Tech — Game Solutions & AI Engineering</title>
+  <meta name="description" content="Arvi AI Tech engineers intelligent games and bespoke AI systems — game development, AI agents, machine learning, generative AI and automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Live neural-net canvas -->
+  <canvas id="neural" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-mark">A<span class="loader-bar"></span></div>
+    <div class="loader-text">INITIALIZING<span class="dots"></span></div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="nav" id="nav">
+    <a href="#home" class="brand" data-magnetic>
+      <span class="brand-mark">A</span>
+      <span class="brand-text">ARVI<span class="brand-accent">·AI·TECH</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-sm btn-primary" data-magnetic>Start a Project</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <span class="pill" data-reveal>
+        <span class="pulse"></span> AI ENGINEERING &nbsp;·&nbsp; GAME STUDIO
+      </span>
+      <h1 class="hero-title" data-reveal>
+        We engineer<br />
+        <span class="rotator gradient-text" id="rotator">intelligent games</span>
+      </h1>
+      <p class="hero-sub" data-reveal>
+        Arvi AI Tech turns ambitious ideas into shipped products — immersive games,
+        autonomous AI agents, machine-learning systems and generative experiences,
+        built end-to-end.
+      </p>
+      <div class="hero-cta" data-reveal>
+        <a href="#contact" class="btn btn-primary" data-magnetic>Build with us <span>→</span></a>
+        <a href="#services" class="btn btn-ghost" data-magnetic>See capabilities</a>
+      </div>
+
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span></span>scroll</div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>UNITY</span><i>✦</i><span>FLUTTER</span><i>✦</i><span>LLMs</span><i>✦</i>
+      <span>COMPUTER VISION</span><i>✦</i><span>RAG AGENTS</span><i>✦</i><span>REINFORCEMENT LEARNING</span><i>✦</i>
+      <span>GENERATIVE AI</span><i>✦</i><span>AUTOMATION</span><i>✦</i>
+      <span>UNITY</span><i>✦</i><span>FLUTTER</span><i>✦</i><span>LLMs</span><i>✦</i>
+      <span>COMPUTER VISION</span><i>✦</i><span>RAG AGENTS</span><i>✦</i><span>REINFORCEMENT LEARNING</span><i>✦</i>
+      <span>GENERATIVE AI</span><i>✦</i><span>AUTOMATION</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">[ CAPABILITIES ]</span>
+      <h2>Full-stack <span class="gradient-text">AI &amp; game</span> engineering</h2>
+      <p>Six core practices. One accountable team. Shipped, not just prototyped.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card tilt" data-reveal data-num="01">
+        <div class="card-glow"></div>
+        <div class="card-icon">🎮</div>
+        <h3>Game Development</h3>
+        <p>Mobile, web and hyper-casual titles built in Unity &amp; Flutter — concept, art, mechanics and launch.</p>
+        <ul><li>2D / 3D</li><li>Puzzle &amp; casual</li><li>Cross-platform</li></ul>
+      </article>
+
+      <article class="card tilt" data-reveal data-num="02">
+        <div class="card-glow"></div>
+        <div class="card-icon">🧠</div>
+        <h3>AI Game Solutions</h3>
+        <p>Smart NPCs, adaptive difficulty, AI opponents and procedural content that keeps players hooked.</p>
+        <ul><li>Game AI</li><li>Procedural</li><li>Analytics</li></ul>
+      </article>
+
+      <article class="card tilt" data-reveal data-num="03">
+        <div class="card-glow"></div>
+        <div class="card-icon">⚙️</div>
+        <h3>Custom AI Systems</h3>
+        <p>Bespoke ML models, computer vision and predictive engines integrated into your product.</p>
+        <ul><li>ML models</li><li>Vision</li><li>Forecasting</li></ul>
+      </article>
+
+      <article class="card tilt" data-reveal data-num="04">
+        <div class="card-glow"></div>
+        <div class="card-icon">✦</div>
+        <h3>Generative AI</h3>
+        <p>Chatbots, copilots and content engines on the latest LLMs — wired into real workflows.</p>
+        <ul><li>Chatbots</li><li>RAG</li><li>Copilots</li></ul>
+      </article>
+
+      <article class="card tilt" data-reveal data-num="05">
+        <div class="card-glow"></div>
+        <div class="card-icon">🤖</div>
+        <h3>Autonomous Agents</h3>
+        <p>Multi-step AI agents that plan, call tools and automate the work your team shouldn't be doing.</p>
+        <ul><li>Tool-use</li><li>Pipelines</li><li>Integrations</li></ul>
+      </article>
+
+      <article class="card tilt" data-reveal data-num="06">
+        <div class="card-glow"></div>
+        <div class="card-icon">📱</div>
+        <h3>App Engineering</h3>
+        <p>Performant mobile &amp; web apps with AI baked in — from MVP to production scale.</p>
+        <ul><li>Flutter</li><li>Web</li><li>AI-native</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" id="process">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">[ HOW WE WORK ]</span>
+      <h2>From signal to <span class="gradient-text">shipped</span></h2>
+      <p>A transparent pipeline — you see progress every week.</p>
+    </div>
+    <div class="timeline">
+      <div class="t-line"></div>
+      <div class="t-step" data-reveal><span class="t-no">01</span><h4>Discover</h4><p>We map goals, users and the metrics that define success.</p></div>
+      <div class="t-step" data-reveal><span class="t-no">02</span><h4>Architect</h4><p>Prototypes, AI architecture and a plan you approve before we build.</p></div>
+      <div class="t-step" data-reveal><span class="t-no">03</span><h4>Engineer</h4><p>Agile sprints with weekly demos and full source transparency.</p></div>
+      <div class="t-step" data-reveal><span class="t-no">04</span><h4>Launch &amp; scale</h4><p>Deploy, monitor and improve continuously with live data.</p></div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section class="section why" id="why">
+    <div class="why-grid">
+      <div class="why-copy" data-reveal>
+        <span class="eyebrow">[ WHY ARVI ]</span>
+        <h2>An <span class="gradient-text">AI-first</span> studio that actually ships</h2>
+        <p>We fuse deep engineering, creative game design and frontier AI into products that delight users and move your numbers.</p>
+        <a href="#contact" class="btn btn-primary" data-magnetic>Let's talk <span>→</span></a>
+      </div>
+      <div class="why-points">
+        <div class="point" data-reveal><span class="point-k">01</span><strong>End-to-end ownership</strong><span>Strategy, design, build and deploy — one team, one throat to choke.</span></div>
+        <div class="point" data-reveal><span class="point-k">02</span><strong>Frontier tech</strong><span>We ship with modern LLMs, ML and battle-tested game engines.</span></div>
+        <div class="point" data-reveal><span class="point-k">03</span><strong>Radically transparent</strong><span>Weekly demos, clear pricing, zero surprises.</span></div>
+        <div class="point" data-reveal><span class="point-k">04</span><strong>Built to scale</strong><span>Production-grade code that grows with your business.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="contact-card" data-reveal>
+      <span class="eyebrow">[ START A PROJECT ]</span>
+      <h2>Let's build something <span class="gradient-text">intelligent</span></h2>
+      <p class="contact-lead">Tell us about your game or AI idea — we reply within 24 hours.</p>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field"><input type="text" name="name" placeholder=" " required /><label>Your name</label></div>
+        <div class="field"><input type="email" name="email" placeholder=" " required /><label>Email address</label></div>
+        <div class="field full"><input type="text" name="subject" placeholder=" " /><label>What do you need? (e.g. AI agent, game)</label></div>
+        <div class="field full"><textarea name="message" rows="4" placeholder=" " required></textarea><label>Tell us about your project</label></div>
+        <button type="submit" class="btn btn-primary btn-block" data-magnetic>Transmit message <span>→</span></button>
+        <p class="form-note" id="formNote" hidden>✦ Received. Connect a backend or email service to deliver these to your inbox.</p>
+      </form>
+      <div class="contact-alt">
+        <a href="mailto:hello@arviaitech.com">hello@arviaitech.com</a>
+        <span>·</span>
+        <a href="#home">www.arviaitech.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">ARVI<span class="brand-accent">·AI·TECH</span></span>
+      </div>
+      <p>Engineering intelligent games &amp; AI systems.</p>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#why">Why Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div style="margin-top: 30px; display: flex; justify-content: center; opacity: 0.8;">
+      <img src="https://api.visitorbadge.io/api/visitors?path=arviaitech.com&label=VISITORS&labelColor=%2304050a&countColor=%2338f3ff&style=plastic" alt="visitor badge" style="border-radius: 6px; box-shadow: 0 0 15px rgba(56,243,255,0.2);" />
+    </div>
+    <p class="copyright">© <span id="year"></span> Arvi AI Tech · All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

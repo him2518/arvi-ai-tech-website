@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arvi AI Tech — Cyber Console Prototype</title>
+  <meta name="description" content="Arvi AI Tech engineers intelligent games and bespoke AI systems — Cyber Console System." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050705;
+      --green: #33ff33;
+      --dark-green: #006600;
+      --dim-green: rgba(51, 255, 51, 0.6);
+      --terminal-panel: rgba(10, 20, 10, 0.85);
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--green);
+      font-family: var(--font-mono);
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* CRT scanlines & screen effects */
+    body::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 999;
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: " ";
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.6) 100%);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    /* Layout Wrapper */
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header Navigation */
+    header {
+      border-bottom: 2px dashed var(--green);
+      padding: 24px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      color: var(--green);
+      text-shadow: 0 0 10px var(--green);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--green);
+      margin-left: 24px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      padding: 4px 10px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--green);
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--green);
+    }
+
+    /* Hero Terminal */
+    .hero {
+      padding: 60px 0;
+    }
+
+    .terminal {
+      background: var(--terminal-panel);
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(51, 255, 51, 0.15);
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px dashed var(--green);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: var(--dim-green);
+    }
+
+    .terminal-body {
+      flex: 1;
+      font-size: 15px;
+      overflow-y: auto;
+    }
+
+    .ascii-art {
+      font-size: clamp(8px, 1.5vw, 12px);
+      line-height: 1.1;
+      white-space: pre;
+      margin-bottom: 24px;
+      color: var(--green);
+      text-shadow: 0 0 5px var(--green);
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .prompt-text {
+      color: var(--green);
+      margin-right: 10px;
+    }
+
+    .terminal-input {
+      background: transparent;
+      border: none;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      flex: 1;
+      outline: none;
+      caret-color: var(--green);
+    }
+
+    .terminal-output {
+      margin-bottom: 16px;
+    }
+
+    .output-entry {
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+    }
+
+    /* Contact form style */
+    .section {
+      padding: 80px 0;
+      border-top: 2px dashed var(--green);
+    }
+
+    .section-head {
+      margin-bottom: 40px;
+    }
+
+    .section-head h2 {
+      font-size: 28px;
+      text-shadow: 0 0 10px var(--green);
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--dim-green);
+    }
+
+    .cyber-form {
+      max-width: 600px;
+      border: 1px solid var(--green);
+      padding: 30px;
+      background: rgba(10, 20, 10, 0.4);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: var(--green);
+    }
+
+    .form-control {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--green);
+      padding: 12px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-control:focus {
+      background: rgba(51, 255, 51, 0.05);
+      box-shadow: 0 0 10px rgba(51, 255, 51, 0.3);
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--green);
+      background: transparent;
+      color: var(--green);
+      padding: 12px 24px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--green);
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--green);
+    }
+
+    .btn-block {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 2px dashed var(--green);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--dim-green);
+    }
+
+    .badge-container {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .badge-container img {
+      filter: grayscale(1) brightness(1.5) sepia(100%) hue-rotate(80deg) saturate(300%);
+    }
+
+    .back-btn {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 1100;
+      background: var(--bg);
+      border: 1px solid var(--green);
+      padding: 8px 14px;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--green);
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--green);
+    }
+  </style>
+  
+  <!-- Google AdSense (Lazy Loaded for Performance) -->
+  <script type="text/javascript">
+    let adLoaded = false;
+    function loadAds() {
+      if(!adLoaded) {
+        adLoaded = true;
+        let s = document.createElement('script');
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8633808258036617";
+        s.crossOrigin = "anonymous";
+        document.head.appendChild(s);
+        window.removeEventListener('scroll', loadAds);
+        window.removeEventListener('mousemove', loadAds);
+        window.removeEventListener('touchstart', loadAds);
+      }
+    }
+    window.addEventListener('scroll', loadAds);
+    window.addEventListener('mousemove', loadAds);
+    window.addEventListener('touchstart', loadAds);
+    setTimeout(loadAds, 5000);
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+
+  <a href="./index.html" class="back-btn">← Compare Options</a>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap nav-inner">
+      <a href="#" class="logo">guest@arviaitech:~$</a>
+      <nav class="nav-links">
+        <a href="#terminal-section">Terminal</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Terminal Section -->
+  <section class="hero" id="terminal-section">
+    <div class="wrap">
+      <div class="terminal">
+        <div class="terminal-header">
+          <span>ARVI AI TECH CORE SYSTEM v2.86</span>
+          <span>SESSION: ACTIVE</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="ascii-art">
+   _   ___   _  _____    _   ___   _____ ___ ___ _  _ 
+  /_\ | _ \ | |/ /_ _|  /_\ |_ _| |_   _| __/ __| || |
+ / _ \|   / | ' < | |  / _ \ | |    | | | _| (__| __ |
+/_/ \_\_|_\ |_|\_\___|/_/ \_\___|   |_| |___\___|_||_|
+          </div>
+          <p>Welcome to Arvi AI Tech. Type <span style="font-weight:bold; text-decoration:underline;">help</span> to list commands.</p>
+          <div class="terminal-output" id="terminalOutput"></div>
+          
+          <div class="prompt-line">
+            <span class="prompt-text">guest@arviaitech:~$</span>
+            <input type="text" class="terminal-input" id="terminalInput" autofocus autocomplete="off" spellcheck="false" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>[ TRANSMIT_DATA_PORT ]</h2>
+        <p>Send secure transmission to Arvi AI Tech engineering team.</p>
+      </div>
+
+      <div class="cyber-form">
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label>&gt; SENDER_NAME</label>
+            <input type="text" name="name" class="form-control" placeholder="Identify yourself..." required />
+          </div>
+          <div class="form-group">
+            <label>&gt; SENDER_EMAIL</label>
+            <input type="email" name="email" class="form-control" placeholder="address@network.com" required />
+          </div>
+          <div class="form-group">
+            <label>&gt; SENDER_PAYLOAD</label>
+            <textarea name="message" rows="4" class="form-control" placeholder="Write logs/message details here..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-block">RUN SEND_TRANSMISSION.SH</button>
+          <p id="formNote" style="margin-top: 15px; text-align: center; font-weight: bold;" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <p style="margin-bottom: 10px;">[ SYSTEM DISK: 98% FREE ] [ MEMORY: 64MB/128MB ]</p>
+      <div class="badge-container">
+        <img src="https://api.visitorbadge.io/api/visitors?path=arviaitech.com&label=VISITORS&labelColor=%2304050a&countColor=%2338f3ff&style=plastic" alt="visitor badge" />
+      </div>
+      <p>© <span id="year"></span> ARVI AI TECH · SYSTEM LEVEL 2 · ALL PORTS ACTIVE</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Terminal Commands Handling
+    const input = document.getElementById("terminalInput");
+    const output = document.getElementById("terminalOutput");
+    const terminalBody = document.getElementById("terminalBody");
+
+    const commands = {
+      help: "Available Commands:\n  - about      Information about Arvi AI Tech\n  - services   List engineering practices\n  - contact    Jump to secure contact terminal\n  - clear      Clear console logs\n  - date       Show system timestamp",
+      about: "Arvi AI Tech engineers game mechanics, custom neural networks, and scalable AI integrations.\nWe bridge the gap between creative game studios and deep machine learning environments.",
+      services: "Capabilities:\n  1. GAME DEVELOPMENT: Unity & Flutter mobile/web systems\n  2. AI INTEGRATION: Intelligent behavior trees, custom models\n  3. AGENT PIPELINES: Multi-tool task automation agents",
+      contact: "Scroll down to use the Secure Transmit form, or email us at: hello@arviaitech.com",
+      date: () => new Date().toString()
+    };
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const value = input.value.trim().toLowerCase();
+        input.value = "";
+        
+        // Add prompt line to output
+        const entry = document.createElement("div");
+        entry.className = "output-entry";
+        entry.innerHTML = `<div><span class="prompt-text">guest@arviaitech:~$</span> ${value}</div>`;
+        
+        if (value) {
+          if (value === "clear") {
+            output.innerHTML = "";
+          } else if (commands[value]) {
+            const result = typeof commands[value] === "function" ? commands[value]() : commands[value];
+            entry.innerHTML += `<div style="color: var(--dim-green); margin-top: 6px; white-space: pre-wrap;">${result}</div>`;
+            output.appendChild(entry);
+          } else {
+            entry.innerHTML += `<div style="color: #ff3333; margin-top: 6px;">Error: Command '${value}' not recognized. Type 'help' for support.</div>`;
+            output.appendChild(entry);
+          }
+        } else {
+          output.appendChild(entry);
+        }
+        
+        // Auto-scroll
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+    });
+
+    // Contact form backend logic
+    const form = document.getElementById("contactForm");
+    const note = document.getElementById("formNote");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const btn = form.querySelector('button[type="submit"]');
+      btn.innerHTML = "TRANSMITTING DATA...";
+      btn.disabled = true;
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          note.hidden = false;
+          note.style.color = "var(--green)";
+          note.textContent = ">>> TRANSMISSION SUCCESSFUL. PACKETS DELIVERED.";
+          btn.innerHTML = "COMPLETED";
+          setTimeout(() => {
+            form.reset();
+            btn.innerHTML = "RUN SEND_TRANSMISSION.SH";
+            btn.disabled = false;
+            note.hidden = true;
+          }, 5000);
+        } else {
+          throw new Error("Rejected");
+        }
+      } catch (err) {
+        note.hidden = false;
+        note.style.color = "#ff3333";
+        note.textContent = ">>> TRANSMISSION FAILED. NETWORK ERROR.";
+        btn.innerHTML = "RETRY TRANSMIT";
+        setTimeout(() => {
+          btn.disabled = false;
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>

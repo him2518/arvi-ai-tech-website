@@ -1,0 +1,20 @@
+# Arvi AI Tech
+
+Arvi AI Tech engineers intelligent games and bespoke AI systems — game development, AI agents, machine learning, generative AI, and automation.
+
+## Services
+- **AI Game Solutions**: Smart NPCs, adaptive difficulty, AI opponents, and procedural content.
+- **Custom AI Systems**: Bespoke ML models, computer vision, and predictive engines.
+- **Generative AI**: Chatbots, RAG copilots, and content engines on modern LLMs.
+- **Autonomous Agents**: Multi-step AI agents that plan, call tools, and automate tasks.
+- **App Engineering**: AI-native mobile (Flutter) and web applications.
+
+## Active Playtests
+- **CricPulse**: Next-generation smart cricket scoring and live analytics.
+- **Arrow Escape**: Arrow-based puzzle runner game.
+
+## Contact
+- Email: hello@arviaitech.com
+- Website: https://arviaitech.com
+
+For more details on projects or consulting, please reach out via email.

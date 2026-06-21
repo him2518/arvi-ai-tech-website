@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arvi AI Tech — Option B · Arcade (Playful & Gaming)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#150b2e; --bg2:#1d1040; --panel:#241452; --ink:#fff; --muted:#b8a9e6;
+    --pink:#ff4d8d; --yellow:#ffd23f; --cyan:#33e1ff; --lime:#7bff6b; --purple:#9d4dff;
+    --r:22px; --maxw:1140px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Outfit",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .fred{font-family:"Fredoka",sans-serif}
+  /* fun background */
+  .bg{position:fixed;inset:0;z-index:-1;background:
+     radial-gradient(700px 500px at 85% 0%,rgba(157,77,255,.5),transparent 60%),
+     radial-gradient(600px 500px at 0% 30%,rgba(255,77,141,.35),transparent 60%),
+     radial-gradient(700px 600px at 60% 110%,rgba(51,225,255,.28),transparent 60%),var(--bg)}
+  .blob{position:absolute;font-size:40px;animation:bob 6s ease-in-out infinite;opacity:.9;filter:drop-shadow(0 8px 16px rgba(0,0,0,.3))}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(6deg)}}
+  /* nav */
+  .nav{position:sticky;top:0;z-index:40;background:rgba(21,11,46,.7);backdrop-filter:blur(12px);border-bottom:2px solid rgba(255,255,255,.08)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
+  .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--pink),var(--yellow));display:grid;place-items:center;color:#150b2e;font-weight:800;font-family:"Fredoka";font-size:22px;box-shadow:0 6px 0 #b3245e}
+  .links{display:flex;align-items:center;gap:26px}
+  .links a{color:var(--muted);font-weight:600}
+  .links a:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:"Fredoka";font-weight:600;font-size:16px;padding:13px 24px;border-radius:14px;cursor:pointer;border:0;transition:.12s;position:relative;top:0}
+  .btn-p{background:var(--pink);color:#fff;box-shadow:0 6px 0 #b3245e}
+  .btn-p:active{top:6px;box-shadow:0 0 0 #b3245e}
+  .btn-y{background:var(--yellow);color:#150b2e;box-shadow:0 6px 0 #c79b00}
+  .btn-y:active{top:6px;box-shadow:0 0 0 #c79b00}
+  .btn-g{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.25)}
+  .btn-sm{padding:9px 16px;font-size:14px;box-shadow:0 5px 0 #b3245e}
+  /* hero */
+  .hero{padding:80px 0 56px;text-align:center;position:relative}
+  .tag{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.12);padding:8px 18px;border-radius:999px;font-family:"Fredoka";font-weight:600;color:var(--yellow)}
+  h1{font-family:"Fredoka";font-size:clamp(40px,7vw,80px);line-height:1;margin:22px 0 0;text-shadow:0 6px 0 rgba(0,0,0,.18)}
+  h1 .p{color:var(--pink)}h1 .c{color:var(--cyan)}h1 .l{color:var(--lime)}
+  .sub{max-width:600px;margin:22px auto 0;color:var(--muted);font-size:clamp(16px,2vw,19px)}
+  .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .stats{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:50px}
+  .chip{background:var(--panel);border:2px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 24px}
+  .chip b{font-family:"Fredoka";display:block;font-size:30px;color:var(--cyan)}
+  .chip span{color:var(--muted);font-size:13px;font-weight:600}
+  /* section */
+  section.s{padding:74px 0}
+  .head{text-align:center;max-width:600px;margin:0 auto 44px}
+  .ey{font-family:"Fredoka";color:var(--cyan);letter-spacing:1px}
+  .head h2{font-family:"Fredoka";font-size:clamp(30px,4.4vw,46px);margin:6px 0 10px}
+  .head p{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--panel);border:2px solid rgba(255,255,255,.08);border-radius:var(--r);padding:28px 24px;transition:.18s}
+  .card:hover{transform:translateY(-8px) rotate(-1deg);border-color:var(--c,var(--pink))}
+  .card:nth-child(1){--c:var(--pink)}.card:nth-child(2){--c:var(--cyan)}.card:nth-child(3){--c:var(--lime)}
+  .card:nth-child(4){--c:var(--yellow)}.card:nth-child(5){--c:var(--purple)}.card:nth-child(6){--c:var(--pink)}
+  .ic{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.06);border:2px solid var(--c);margin-bottom:16px}
+  .card h3{font-family:"Fredoka";font-size:21px;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:14.5px}
+  /* cta */
+  .panel{background:linear-gradient(135deg,var(--pink),var(--purple));border-radius:28px;padding:54px;text-align:center;box-shadow:0 14px 0 rgba(0,0,0,.25)}
+  .panel h2{font-family:"Fredoka";font-size:clamp(28px,4vw,46px)}
+  .panel p{margin:12px 0 24px;opacity:.95}
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-weight:600;margin-top:30px}
+  .switch{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--yellow);color:#150b2e;border-radius:12px;padding:9px 14px;font-family:"Fredoka";font-weight:600;box-shadow:0 5px 0 #c79b00}
+  @media(max-width:860px){.links{display:none}.grid{grid-template-columns:1fr}.panel{padding:36px 22px}}
+</style>
+</head>
+<body>
+<div class="bg">
+  <span class="blob" style="left:8%;top:18%">🎮</span>
+  <span class="blob" style="right:10%;top:14%;animation-delay:-2s">👾</span>
+  <span class="blob" style="left:14%;bottom:24%;animation-delay:-4s">🕹️</span>
+  <span class="blob" style="right:14%;bottom:30%;animation-delay:-1s">✨</span>
+</div>
+<a class="switch" href="./index.html">← Compare options</a>
+
+<header class="nav"><div class="wrap">
+  <div class="brand"><span class="mark">A</span> Arvi AI Tech</div>
+  <nav class="links"><a href="#s1">Games</a><a href="#s1">AI</a><a href="#cta">Contact</a><a class="btn btn-p btn-sm" href="#cta">Play with us</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <span class="tag">🚀 Game Studio × AI Lab</span>
+  <h1>We make <span class="p">games</span> that<br/><span class="c">think</span> &amp; <span class="l">AI</span> that plays.</h1>
+  <p class="sub">Arvi AI Tech builds addictive games and playful AI experiences — bold, colorful and seriously fun to use.</p>
+  <div class="cta"><a class="btn btn-y" href="#cta">Start a project 🎯</a><a class="btn btn-g" href="#s1">See our work</a></div>
+  <div class="stats">
+    <div class="chip"><b>120+</b><span>GAMES & BUILDS</span></div>
+    <div class="chip"><b>40+</b><span>HAPPY CLIENTS</span></div>
+    <div class="chip"><b>12+</b><span>AI MODELS LIVE</span></div>
+  </div>
+</div></section>
+
+<section class="s" id="s1"><div class="wrap">
+  <div class="head"><span class="ey">★ WHAT WE BUILD ★</span><h2>Pick your power-up</h2><p>Six ways we level up your product.</p></div>
+  <div class="grid">
+    <div class="card"><div class="ic">🎮</div><h3>Game Development</h3><p>2D/3D mobile & web games built to be played again and again.</p></div>
+    <div class="card"><div class="ic">🧠</div><h3>AI Game Solutions</h3><p>Smart bots, adaptive difficulty and endless procedural fun.</p></div>
+    <div class="card"><div class="ic">⚙️</div><h3>Custom AI Systems</h3><p>ML, vision and prediction engines tailored to you.</p></div>
+    <div class="card"><div class="ic">✨</div><h3>Generative AI</h3><p>Chatbots & copilots with personality, powered by top LLMs.</p></div>
+    <div class="card"><div class="ic">🤖</div><h3>AI Automation</h3><p>Agents that grind the boring quests so you don't have to.</p></div>
+    <div class="card"><div class="ic">📱</div><h3>App Development</h3><p>Snappy, delightful apps with AI built right in.</p></div>
+  </div>
+</div></section>
+
+<section class="s" id="cta"><div class="wrap">
+  <div class="panel">
+    <h2>Ready Player One? 🕹️</h2>
+    <p>Tell us your idea — we'll bring the fun and the tech.</p>
+    <a class="btn btn-y" href="mailto:hello@arviaitech.com">hello@arviaitech.com →</a>
+  </div>
+</div></section>
+
+<footer>© 2026 Arvi AI Tech · Option B “Arcade” — playful & gaming</footer>
+</body>
+</html>

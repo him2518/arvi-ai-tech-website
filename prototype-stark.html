@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arvi AI Tech — Stark Minimalist Prototype</title>
+  <meta name="description" content="Arvi AI Tech engineers intelligent games and bespoke AI systems — Stark Minimalist Design System." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #000000;
+      --muted: #666666;
+      --light-gray: #f0f0f0;
+      --border: #000000;
+      --font-grotesk: 'Space Grotesk', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-grotesk);
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Layout Wrapper */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Grid layout outline */
+    .grid-line-v {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(0, 0, 0, 0.05);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 2px solid var(--border);
+      background: var(--bg);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      text-decoration: none;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink);
+      margin-left: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 13px;
+      border: 1px solid transparent;
+      padding: 6px 12px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: var(--muted);
+      max-width: 750px;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 14px 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 14px;
+      border: 2px solid var(--border);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--ink);
+      margin-left: 16px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    /* Section */
+    .section {
+      padding: 80px 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-head {
+      margin-bottom: 60px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: block;
+      color: var(--muted);
+    }
+
+    .section h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    /* Capabilities list (Grid layout) */
+    .cap-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      border: 1px solid var(--border);
+    }
+
+    .cap-item {
+      padding: 40px;
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .cap-item:hover {
+      background: var(--light-gray);
+    }
+
+    .cap-num {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .cap-item h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .cap-item p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Contact Form styling */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    @media(max-width: 800px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      padding: 12px;
+      color: var(--ink);
+      font-family: var(--font-grotesk);
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-control:focus {
+      background: var(--light-gray);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+    }
+
+    .btn-block {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0;
+      background: var(--bg);
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .badge-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .badge-container img {
+      filter: grayscale(1) contrast(1.5);
+    }
+
+    .back-btn {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 100;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      padding: 10px 16px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+  </style>
+  
+  <!-- Google AdSense (Lazy Loaded for Performance) -->
+  <script type="text/javascript">
+    let adLoaded = false;
+    function loadAds() {
+      if(!adLoaded) {
+        adLoaded = true;
+        let s = document.createElement('script');
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8633808258036617";
+        s.crossOrigin = "anonymous";
+        document.head.appendChild(s);
+        window.removeEventListener('scroll', loadAds);
+        window.removeEventListener('mousemove', loadAds);
+        window.removeEventListener('touchstart', loadAds);
+      }
+    }
+    window.addEventListener('scroll', loadAds);
+    window.addEventListener('mousemove', loadAds);
+    window.addEventListener('touchstart', loadAds);
+    setTimeout(loadAds, 5000);
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+
+  <!-- Background Lines -->
+  <div class="grid-line-v" style="left: 20%;"></div>
+  <div class="grid-line-v" style="left: 50%;"></div>
+  <div class="grid-line-v" style="left: 80%;"></div>
+
+  <a href="./index.html" class="back-btn">← Compare Options</a>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap nav-inner">
+      <a href="#" class="logo">ARVI // AI // TECH</a>
+      <nav class="nav-links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="pill">Prototype C // Stark Minimal</div>
+      <h1>We engineer custom AI systems &amp; intelligent games.</h1>
+      <p class="hero-sub">
+        End-to-end technical execution for ambitious digital products. Built to perform. Built to scale. 
+      </p>
+      <div>
+        <a href="#contact" class="btn">Start Project</a>
+        <a href="#capabilities" class="btn btn-secondary">Capabilities</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="section" id="capabilities">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Services // Capabilities</span>
+        <h2>Engineering Practices</h2>
+      </div>
+
+      <div class="cap-list">
+        <div class="cap-item">
+          <span class="cap-num">01 // GAME STUDIOS</span>
+          <h3>Game Engineering</h3>
+          <p>Complete 2D/3D development in Unity &amp; Flutter. We construct gameplay logic, performant rendering pipelines, and clean architecture.</p>
+        </div>
+
+        <div class="cap-item">
+          <span class="cap-num">02 // COGNITIVE LABS</span>
+          <h3>AI Game Solutions</h3>
+          <p>Procedural generator algorithms, neural behaviors, and smart computer-controlled opponents configured for dynamic play loops.</p>
+        </div>
+
+        <div class="cap-item">
+          <span class="cap-num">03 // AUTOMATION WINGS</span>
+          <h3>Autonomous Agents</h3>
+          <p>Multi-step agents linked with utility APIs to manage workflows, process logs, and perform complex pipeline calculations autonomously.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Transmission // Inquiry</span>
+          <h2 style="margin-bottom: 20px;">Let's build.</h2>
+          <p style="color:var(--muted); margin-bottom: 24px;">Submit your project specifications. Our engineering office will process and respond within one business day.</p>
+          <p style="font-weight: 700;">hello@arviaitech.com</p>
+        </div>
+
+        <div>
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label>Sender name</label>
+              <input type="text" name="name" class="form-control" placeholder="Name or Organization" required />
+            </div>
+            <div class="form-group">
+              <label>Contact Email</label>
+              <input type="email" name="email" class="form-control" placeholder="email@address.com" required />
+            </div>
+            <div class="form-group">
+              <label>Message details</label>
+              <textarea name="message" rows="4" class="form-control" placeholder="Describe project bounds, tools, and budget..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-block">Submit Specs</button>
+            <p id="formNote" style="margin-top: 15px; font-weight: 700; text-align: center; text-transform: uppercase;" hidden></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <span>ARVI AI TECH // © <span id="year"></span></span>
+      </div>
+      
+      <div class="badge-container">
+        <img src="https://api.visitorbadge.io/api/visitors?path=arviaitech.com&label=VISITORS&labelColor=%2304050a&countColor=%2338f3ff&style=plastic" alt="visitor badge" />
+      </div>
+
+      <div>
+        <span>All systems nominal</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("contactForm");
+    const note = document.getElementById("formNote");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const btn = form.querySelector('button[type="submit"]');
+      btn.innerHTML = "SUBMITTING...";
+      btn.disabled = true;
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          note.hidden = false;
+          note.style.color = "var(--ink)";
+          note.textContent = "// TRANSMISSION COMPLETED SUCCESSFULLY.";
+          btn.innerHTML = "SUCCESS";
+          setTimeout(() => {
+            form.reset();
+            btn.innerHTML = "Submit Specs";
+            btn.disabled = false;
+            note.hidden = true;
+          }, 5000);
+        } else {
+          throw new Error("Rejected");
+        }
+      } catch (err) {
+        note.hidden = false;
+        note.style.color = "red";
+        note.textContent = "// TRANSMISSION ERROR. TRY AGAIN.";
+        btn.innerHTML = "RETRY";
+        setTimeout(() => {
+          btn.disabled = false;
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
