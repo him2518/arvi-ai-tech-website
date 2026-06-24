@@ -299,3 +299,32 @@ form.addEventListener("submit", async (e) => {
     }, 3000);
   }
 });
+
+/* ---------- App Launch Popup ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('appLaunchPopup');
+  const closeBtn = document.getElementById('closeAppPopup');
+  
+  if (!popup || !closeBtn) return;
+  
+  // Check if it's already been shown in this session
+  if (!sessionStorage.getItem('arrowPopupShown')) {
+    // Show popup after 2.5 seconds
+    setTimeout(() => {
+      popup.classList.add('active');
+      sessionStorage.setItem('arrowPopupShown', 'true');
+    }, 2500);
+  }
+
+  // Close when clicking the X button
+  closeBtn.addEventListener('click', () => {
+    popup.classList.remove('active');
+  });
+
+  // Close when clicking outside the modal content
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      popup.classList.remove('active');
+    }
+  });
+});
