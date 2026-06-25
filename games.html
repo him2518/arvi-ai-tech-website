@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Games — Arvi AI Tech</title>
+  <meta name="description" content="Explore our portfolio of intelligent games and applications available on the Google Play Store, Xiaomi Store, and Indus App Store." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <!-- Live neural-net canvas -->
+  <canvas id="neural" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="brand" data-magnetic>
+      <span class="brand-mark">A</span>
+      <span class="brand-text">ARVI<span class="brand-accent">·AI·TECH</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#playtests">Playtests</a>
+      <a href="games.html" class="active">Games</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#why">Why Us</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#contact" class="btn btn-sm btn-primary" data-magnetic>Start a Project</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu" data-magnetic>
+      <span style="display:block; width:24px; height:2px; background:var(--text); border-radius:2px;"></span>
+      <span style="display:block; width:24px; height:2px; background:var(--text); border-radius:2px;"></span>
+    </button>
+  </header>
+
+  <main style="padding-top: 150px; min-height: 100vh;">
+    <section class="section">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">[ OUR PORTFOLIO ]</span>
+        <h2>Explore our <span class="gradient-text">Games</span></h2>
+        <p>A collection of our intelligent games available across major app stores.</p>
+      </div>
+
+      <div class="playtests-grid">
+        <article class="card tilt" data-reveal>
+          <div class="card-glow"></div>
+          <div class="card-icon" style="background: rgba(56,243,255,0.1); font-size: 36px; padding-bottom: 5px;">🏏</div>
+          <h3 style="font-size: 26px;">CricPulse</h3>
+          <p style="margin-bottom: 24px; font-size: 15px;">Experience the next generation of smart cricket scoring and live analytics.</p>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <a href="https://play.google.com/store/apps/details?id=com.arviai.cricpulse" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" style="text-decoration: none;" data-magnetic>Get on Google Play <span>→</span></a>
+          </div>
+        </article>
+
+        <article class="card tilt" data-reveal>
+          <div class="card-glow"></div>
+          <div class="card-icon" style="background: rgba(255,0,122,0.1); font-size: 36px; padding-bottom: 5px;">🏹</div>
+          <h3 style="font-size: 26px;">Arrow Escape</h3>
+          <p style="margin-bottom: 24px; font-size: 15px;">Test your reflexes in our new arrow-based puzzle runner. Tap to steer, avoid obstacles, and escape the maze.</p>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <a href="https://play.google.com/apps/testing/com.arviaitech.arrowescape" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" style="background: linear-gradient(135deg, #ff007a, var(--violet)); box-shadow: 0 12px 30px rgba(255,0,122,0.25); text-decoration: none;" data-magnetic>Get on Google Play <span>→</span></a>
+            <a href="https://global.app.mi.com/details?lo=IN&la=en_US&id=com.himanshu.arrows_escape" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none;" data-magnetic>Get on Xiaomi Store <span>→</span></a>
+            <a href="https://www.indusappstore.com/apps/puzzle/arrows-escape/com.himanshu.arrows_escape/?page=details&id=com.himanshu.arrows_escape" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none;" data-magnetic>Get on Indus Store <span>→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">ARVI<span class="brand-accent">·AI·TECH</span></span>
+      </div>
+      <p>Engineering intelligent games &amp; AI systems.</p>
+      <div class="footer-links">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#process">Process</a>
+        <a href="index.html#why">Why Us</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <div style="margin-top: 30px; display: flex; justify-content: center; opacity: 0.8;">
+      <img src="https://api.visitorbadge.io/api/visitors?path=arviaitech.com&label=VISITORS&labelColor=%2304050a&countColor=%2338f3ff&style=plastic" alt="visitor badge" style="border-radius: 6px; box-shadow: 0 0 15px rgba(56,243,255,0.2);" />
+    </div>
+    <p class="copyright">© <span id="year"></span> Arvi AI Tech · All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
