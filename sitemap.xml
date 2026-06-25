@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
       <loc>https://arviaitech.com/</loc>
-      <lastmod>2026-06-14</lastmod>
+      <lastmod>2026-06-25</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
+   </url>
+   <url>
+      <loc>https://arviaitech.com/privacy-policy-arrow-escape.html</loc>
+      <lastmod>2026-06-25</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   <url>
+      <loc>https://arviaitech.com/cricpulse-privacy-policy.html</loc>
+      <lastmod>2026-06-25</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   <url>
+      <loc>https://arviaitech.com/cricpulse-delete-account.html</loc>
+      <lastmod>2026-06-25</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.8</priority>
    </url>
 </urlset>
