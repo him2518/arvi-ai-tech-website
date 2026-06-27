@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Blog — Arvi AI Tech</title>
+  <meta name="description" content="Technical deep dives into AI engineering, RAG systems, procedural generation, and game development at Arvi AI Tech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    .blog-container { max-width: 800px; margin: 0 auto; padding-top: 150px; padding-bottom: 100px; }
+    .blog-post { margin-bottom: 100px; position: relative; }
+    .blog-post::after { content: ''; display: block; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(56,243,255,0.2), transparent); margin-top: 80px; }
+    .blog-post:last-child::after { display: none; }
+    .blog-category { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--cyan); background: rgba(56,243,255,0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; border: 1px solid rgba(56,243,255,0.2); }
+    .blog-title { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; margin-bottom: 16px; letter-spacing: -1px; }
+    .blog-meta { color: var(--text-muted); font-size: 14px; margin-bottom: 40px; display: flex; align-items: center; gap: 8px; }
+    .blog-content p { font-size: 17px; line-height: 1.7; margin-bottom: 24px; color: rgba(255,255,255,0.85); text-align: justify; }
+    .blog-content h3 { font-size: 22px; color: var(--text); margin-top: 40px; margin-bottom: 16px; font-family: 'Sora', sans-serif; }
+    .blog-header { text-align: center; margin-bottom: 80px; }
+  </style>
+</head>
+<body>
+  <!-- Live neural-net canvas -->
+  <canvas id="neural" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="brand" data-magnetic>
+      <span class="brand-mark">A</span>
+      <span class="brand-text">ARVI<span class="brand-accent">·AI·TECH</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#services">Services</a>
+      <a href="games.html">Games</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#why">Why Us</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#contact" class="btn btn-sm btn-primary" data-magnetic>Start a Project</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu" data-magnetic>
+      <span style="display:block; width:24px; height:2px; background:var(--text); border-radius:2px;"></span>
+      <span style="display:block; width:24px; height:2px; background:var(--text); border-radius:2px;"></span>
+    </button>
+  </header>
+
+  <main class="blog-container section">
+    
+    <div class="blog-header" data-reveal>
+      <span class="eyebrow">[ ENGINEERING INSIGHTS ]</span>
+      <h1 style="font-size: clamp(40px, 6vw, 64px); line-height: 1.1; margin-bottom: 16px;">The <span class="gradient-text">Arvi AI</span> Blog</h1>
+      <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Deep dives into artificial intelligence, procedural generation, and the engineering behind our systems.</p>
+    </div>
+
+    <!-- POST 1 -->
+    <article class="blog-post" id="post1" data-reveal>
+      <div class="blog-category">AI Engineering</div>
+      <h1 class="blog-title">Building AI Agents That Actually Work in Production</h1>
+      <div class="blog-meta"><span>June 2026</span></div>
+      
+      <div class="blog-content">
+        <p>AI agent demos are everywhere. A chatbot books a flight, a coding assistant writes a feature, an automation agent processes invoices — all in a polished two-minute video. But anyone who has tried to deploy these systems into production knows the gap between demo and reality is enormous.</p>
+        <p>At Arvi AI Tech, we have built and deployed multi-step AI agents for customer support, internal workflow automation, and game content generation. Here is what we have learned about making them reliable enough for production use.</p>
+        
+        <h3>The Demo-to-Production Gap</h3>
+        <p>In a demo, the agent handles the happy path perfectly. In production, it encounters ambiguous instructions, missing data, API timeouts, rate limits, and edge cases no one anticipated. The difference between a demo agent and a production agent is the same as the difference between a script and a system. An agent's execution path depends on LLM outputs, which are probabilistic. Every step is a potential failure point, and failures cascade in unpredictable ways.</p>
+        
+        <h3>Lesson 1: Design for failure at every step</h3>
+        <p>Every tool call can fail, every LLM response can be malformed, every external API can timeout. We wrap each tool call in structured error handling and feed clear error messages back to the LLM — which is often your best error handler, finding workarounds you never coded explicitly.</p>
+
+        <h3>Lesson 2: State management is everything</h3>
+        <p>The most common production failure is lost or corrupted state. We checkpoint state after every successful step to a durable store, so an agent can resume from where it failed rather than starting over.</p>
+
+        <h3>Lesson 3: Observability is not optional</h3>
+        <p>Every agent emits structured logs at every decision point — what was asked, what it decided, what tools it called, and how long each step took. This catches subtle bugs where agents technically succeed but take expensive or slow paths.</p>
+
+        <h3>Lesson 4: Constrain the action space</h3>
+        <p>The most reliable agents have carefully limited capabilities. We follow least privilege — read-only access where possible, confirmation steps for irreversible actions, rate limits on expensive operations.</p>
+
+        <h3>Lesson 5: Test with chaos, not just happy paths</h3>
+        <p>We maintain adversarial test scenarios — APIs that fail on the third call, responses that are valid but semantically wrong, contradictory user inputs. These catch regressions that happy-path tests miss.</p>
+
+        <p>Building production AI agents is a systems engineering challenge, not an AI challenge. The LLM is the easy part. The hard part is state management, error handling, observability, and testing. Treat agents as distributed systems, and they become remarkably reliable.</p>
+      </div>
+    </article>
+
+    <!-- POST 2 -->
+    <article class="blog-post" id="post2" data-reveal>
+      <div class="blog-category">Game Development</div>
+      <h1 class="blog-title">Procedural Level Generation: Making Every Playthrough Unique</h1>
+      <div class="blog-meta"><span>June 2026</span></div>
+      
+      <div class="blog-content">
+        <p>One of the hardest problems in puzzle game design is content. Players consume levels faster than designers can create them. Procedural generation promises infinite content, but naive approaches produce levels that are unsolvable, trivially easy, or frustratingly unfair.</p>
+        
+        <h3>The solvability guarantee</h3>
+        <p>Every generated level must be solvable — a player hitting an impossible level loses trust permanently. Our approach is construction-based, not generation-and-test. We build levels by working backwards from a solved state, applying reverse moves to create the puzzle. This guarantees solvability by construction, because we can always replay the shuffle in reverse.</p>
+        
+        <h3>Difficulty control</h3>
+        <p>Solvability isn't enough; levels need the right difficulty. We control it through parameters: minimum solution length, number of decision points, presence of dead ends, and the ratio of constrained to free moves. The generator produces candidates and keeps only those matching the target difficulty profile — fast, because it already knows the solution.</p>
+
+        <h3>The interestingness problem</h3>
+        <p>A solvable level at the right difficulty can still be boring. Interesting puzzles have structure — recognizable patterns, moments of insight, satisfying state evolution. We bias generation toward configurations that create clusters, bottlenecks, and cascades. These biases are tunable per game and difficulty tier.</p>
+
+        <h3>Performance at scale</h3>
+        <p>Our generators run in the build pipeline for level packs and on-device for endless mode. On-device generation targets under 50 milliseconds on mid-range mobile hardware, using lookup tables and precomputed move sequences rather than expensive graph searches.</p>
+
+        <p>Procedural generation is not about randomness — it's about controlled variation within carefully designed constraints. The constraints encode game design knowledge; the variation ensures no two levels feel the same.</p>
+      </div>
+    </article>
+
+    <!-- POST 3 -->
+    <article class="blog-post" id="post3" data-reveal>
+      <div class="blog-category">Machine Learning</div>
+      <h1 class="blog-title">A Practical Guide to Building RAG Systems</h1>
+      <div class="blog-meta"><span>May 2026</span></div>
+      
+      <div class="blog-content">
+        <p>Retrieval-Augmented Generation lets you build AI features grounded in your own data — up-to-date and verifiable. But building a RAG system that works in production is harder than the tutorials suggest.</p>
+        
+        <h3>Chunking is the foundation</h3>
+        <p>The most impactful decision is how you chunk documents. Too large wastes context; too small loses meaning. For technical docs we use 400–600 token chunks with 50–100 token overlap; for support tickets, 200–300 tokens; for legal documents, 800–1000. How you split matters as much as size — we use semantic chunking that respects paragraph boundaries and section headers, never splitting mid-sentence.</p>
+        
+        <h3>Embedding model selection</h3>
+        <p>The embedding model determines retrieval quality. We evaluate models on our clients' actual query-document pairs, not public benchmarks, using sets of 100–200 rated pairs before committing.</p>
+
+        <h3>Retrieval is not just vector search</h3>
+        <p>Production RAG needs hybrid retrieval combining vector and keyword search, metadata filtering to narrow the search space, and a reranking layer. After initial retrieval returns 20–50 candidates, a cross-encoder reranker scores each against the query — the top results after reranking are far more relevant than vector search alone.</p>
+
+        <h3>The generation step</h3>
+        <p>Instruct the model to cite sources (makes responses verifiable and helps debug retrieval). Tell it to say "I don't have enough information" when chunks lack the answer, or it will hallucinate. Place the most relevant chunks first — LLMs pay more attention to the start and end of context.</p>
+
+        <h3>Evaluation and monitoring</h3>
+        <p>RAG systems degrade silently. We track retrieval relevance, answer faithfulness, and answer completeness using a mix of automated LLM-as-judge and human review.</p>
+
+        <p>Start simple. Good chunking, a standard embedding model, and a well-engineered prompt beat a complex system with poor fundamentals. Add complexity only when metrics show where the simple system falls short.</p>
+      </div>
+    </article>
+
+    <!-- POST 4 -->
+    <article class="blog-post" id="post4" data-reveal>
+      <div class="blog-category">Game AI</div>
+      <h1 class="blog-title">Adaptive Difficulty: How AI Keeps Players in the Flow</h1>
+      <div class="blog-meta"><span>May 2026</span></div>
+      
+      <div class="blog-content">
+        <p>The best games feel like they read your mind. When you struggle, the challenge eases; when you cruise, it ramps up. This is adaptive difficulty, and modern AI makes it far more effective than the simple approaches of the past.</p>
+        
+        <h3>What is flow</h3>
+        <p>Flow is full immersion at the edge of your ability. Too easy, you get bored; too hard, you get frustrated. Traditional Easy/Normal/Hard settings are a blunt instrument — they assume all players in a tier have the same skill, and that skill never changes. Both are wrong.</p>
+        
+        <h3>Player modeling</h3>
+        <p>We model players across multiple dimensions, not a single skill number. A player might excel at spatial reasoning but struggle under time pressure. Our models track completion rate, time, hint usage, retries, and move efficiency per mechanic, updating after every level with exponential smoothing to capture improvement.</p>
+
+        <h3>Difficulty adjustment</h3>
+        <p>Adjustment should be invisible — players should feel they're getting better, not that the game got easier. We tune structural elements players don't directly perceive (red herring moves, solution length, proximity to the goal) rather than obvious knobs like timers. And we adjust in both directions, increasing difficulty as skill grows.</p>
+
+        <h3>The cold start problem</h3>
+        <p>New players are hardest to model. We solve it with a calibration sequence disguised as a tutorial — each early level secretly tests a specific skill dimension while teaching mechanics. The model converges within 15–20 levels.</p>
+
+        <h3>Measuring success</h3>
+        <p>The metrics that matter are session length, voluntary return rate, and quit-point distribution — plus the share of players rating difficulty as "just right." When adaptive difficulty works, it's invisible; players just feel the game is well-designed.</p>
+      </div>
+    </article>
+
+    <!-- POST 5 -->
+    <article class="blog-post" id="post5" data-reveal>
+      <div class="blog-category">Engineering</div>
+      <h1 class="blog-title">Why We Use Flutter for Casual Game Development</h1>
+      <div class="blog-meta"><span>April 2026</span></div>
+      
+      <div class="blog-content">
+        <p>When people think of game development they think of Unity or Unreal — powerful engines built for 3D worlds. But for casual and puzzle games that dominate mobile app stores, they're often overkill. At Arvi AI Tech, Flutter has become our primary framework for 2D casual games.</p>
+        
+        <h3>The case for Flutter</h3>
+        <p>One codebase runs on iOS, Android, and web with native performance. The Flame engine provides sprite rendering, animation, collision detection, and particle effects, integrating seamlessly with Flutter's widget system — so game UI uses the same framework as the game. Hot reload and Dart's tooling let us ship in weeks what would take months in Unity.</p>
+        
+        <h3>Performance is good enough</h3>
+        <p>Flutter renders at 60fps on modern devices, and our puzzle games run at 60fps on hardware three to four years old. The caveats are older devices with heavy transparency effects, which we mitigate with early profiling.</p>
+
+        <h3>Where Flutter falls short</h3>
+        <p>3D is its weakest area — use a dedicated 3D engine for that. Complex physics (ragdolls, fluids, destructible environments) needs a real physics engine. Audio is adequate for sound effects and music but not for spatial or procedural audio.</p>
+
+        <h3>Our stack</h3>
+        <p>Flame for the engine, Riverpod for state, Hive for persistence, Firebase for analytics, Rive or Lottie for animation, and custom procedural generators for levels. Mature, well-documented, and fast for new team members.</p>
+
+        <p>Flutter isn't trying to replace Unity — it occupies a different niche where cross-platform reach and development speed matter more than cutting-edge graphics. For puzzle, tap, card, and word games, it delivers everything we need at a fraction of the cost.</p>
+      </div>
+    </article>
+
+    <!-- POST 6 -->
+    <article class="blog-post" id="post6" data-reveal>
+      <div class="blog-category">AI</div>
+      <h1 class="blog-title">Architecting LLM-Powered Applications: Lessons from the Field</h1>
+      <div class="blog-meta"><span>April 2026</span></div>
+      
+      <div class="blog-content">
+        <p>LLMs are the most versatile building blocks in modern software, but integrating them into production requires a different mindset. Their probabilistic outputs, cost structure, latency, and failure modes are all different from deterministic APIs.</p>
+        
+        <h3>Prompt management</h3>
+        <p>Prompts are code — version-controlled, tested, and reviewed. We store them as templated strings separate from logic, with test cases per prompt and changelogs that record what changed and why. When quality drops, the changelog points to the culprit.</p>
+        
+        <h3>Output validation</h3>
+        <p>Never trust LLM output. For structured output we validate against a schema and retry with an error message on failure. For unstructured output we use lightweight classifiers to catch hallucinated URLs, fabricated statistics, or off-topic responses.</p>
+
+        <h3>Cost control</h3>
+        <p>The biggest cost drivers are unnecessary calls and oversized prompts. A semantic cache can eliminate 30–50% of calls. Trim retrieved documents to relevant excerpts, summarize long conversation history, and use model routing — sending simple queries to cheaper models — to cut costs 40–60%.</p>
+
+        <h3>Latency optimization</h3>
+        <p>Streaming is the most impactful: time-to-first-token under 500ms feels responsive even if the full response takes seconds. Make independent LLM calls in parallel, and use speculative execution for predictable workflows.</p>
+
+        <h3>Testing strategy</h3>
+        <p>LLM apps can't be tested with exact assertions. We use evaluation-based testing against quality criteria and maintain golden datasets — curated inputs with human-rated reference outputs — as regression tests that block deployment on quality drops.</p>
+
+        <p>The architecture we've converged on is a simple pipeline: input validation → prompt construction → model routing → LLM call with retries → output validation → post-processing. Each stage is independently testable and observable. Simplicity is the point — LLM applications have enough inherent complexity already.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">ARVI<span class="brand-accent">·AI·TECH</span></span>
+      </div>
+      <p>Engineering intelligent games &amp; AI systems.</p>
+      <div class="footer-links">
+        <a href="index.html#services">Services</a>
+        <a href="games.html">Games</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#process">Process</a>
+        <a href="index.html#why">Why Us</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <div style="margin-top: 30px; display: flex; justify-content: center; opacity: 0.8;">
+      <img src="https://api.visitorbadge.io/api/visitors?path=arviaitech.com&label=VISITORS&labelColor=%2304050a&countColor=%2338f3ff&style=plastic" alt="visitor badge" style="border-radius: 6px; box-shadow: 0 0 15px rgba(56,243,255,0.2);" />
+    </div>
+    <p class="copyright">© <span id="year"></span> Arvi AI Tech · All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
