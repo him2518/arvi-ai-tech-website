@@ -110,26 +110,6 @@ window.addEventListener("load", () => {
   draw();
 })();
 
-/* ---------- Custom cursor ---------- */
-(() => {
-  if (matchMedia("(max-width: 900px)").matches) return;
-  const dot = document.getElementById("cursorDot");
-  const ring = document.getElementById("cursorRing");
-  let rx = 0, ry = 0, x = 0, y = 0;
-  addEventListener("mousemove", (e) => {
-    x = e.clientX; y = e.clientY;
-    dot.style.transform = `translate(${x}px, ${y}px) translate(-50%,-50%)`;
-  });
-  (function loop() {
-    rx += (x - rx) * 0.18; ry += (y - ry) * 0.18;
-    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll("a, button, .card, input, textarea, [data-magnetic]").forEach((el) => {
-    el.addEventListener("mouseenter", () => ring.classList.add("hover"));
-    el.addEventListener("mouseleave", () => ring.classList.remove("hover"));
-  });
-})();
 
 /* ---------- Magnetic buttons ---------- */
 document.querySelectorAll("[data-magnetic]").forEach((el) => {
